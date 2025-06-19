@@ -142,6 +142,14 @@ namespace Galleon.Checkout.Shared
         public string transaction_id { get; set; }
     }
     
+    [Serializable]
+    public class TransactionResultData
+    {
+        public string   transaction_id { get; set; }
+        public bool     isSuccess      { get; set; }
+        public string[] errors         { get; set; }
+    }
+    
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Recipt Validation
     
     /// /validate_receipt
@@ -199,14 +207,14 @@ namespace Galleon.Checkout.Shared
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Email
     
     [Serializable]
-    public class Update3EmailRequest
+    public class UpdateEmailRequest
     {
         public string user_id { get; set; }
         public string email   { get; set; }
     }
     
     [Serializable]
-    public class Update3EmailResponse
+    public class UpdateEmailResponse
     {
     }
 }
