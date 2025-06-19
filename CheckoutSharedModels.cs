@@ -62,16 +62,16 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class PaymentMethodsResponse
     {
-        public List<PaymentMethodData> payment_methods { get; set; }    
+        public PaymentMethodData[] payment_methods { get; set; }    
     }
     
     [Serializable]
     public class PaymentMethodData
     {
-        public string              type                   { get; set; }
-        public List<PaymentAction> initialization_actions { get; set; }    
-        public List<PaymentAction> vaulting_actions       { get; set; }    
-        public List<PaymentAction> transaction_actions    { get; set; }    
+        public string          type                   { get; set; }
+        public PaymentAction[] initialization_actions { get; set; }    
+        public PaymentAction[] vaulting_actions       { get; set; }    
+        public PaymentAction[] transaction_actions    { get; set; }    
     }
     
     [Serializable]
