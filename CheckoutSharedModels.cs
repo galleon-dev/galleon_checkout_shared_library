@@ -147,6 +147,7 @@ namespace Galleon.Checkout.Shared
     {
         public string   transaction_id { get; set; }
         public bool     isSuccess      { get; set; }
+        public bool     isCanceled     { get; set; }
         public string[] errors         { get; set; }
     }
     
