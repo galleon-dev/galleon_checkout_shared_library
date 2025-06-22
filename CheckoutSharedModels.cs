@@ -151,6 +151,38 @@ namespace Galleon.Checkout.Shared
         public string[] errors         { get; set; }
     }
     
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Credit Card Actions
+
+    [Serializable]
+    public class ChargeRequest
+    {
+        public string                     Sku      { get; set; }
+        public int                        Quantity { get; set; }
+        public decimal                    Amount   { get; set; }
+        public string                     Currency { get; set; }
+        public Card?                      Card     { get; set; }
+        public Dictionary<string, string> Metadata { get; set; } = new();
+    }
+
+    [Serializable]
+    public class ChargeResponse
+    {
+        public bool            Status      { get; set; }
+        public string?         PaymentId   { get; set; }
+        public PaymentAction[] NextActions { get; set; }
+    }
+    
+    //// Helper Types
+    
+    [Serializable]
+    public class Card
+    {
+        public required string Number   { get; set; }
+        public required string ExpMonth { get; set; }
+        public required string ExpYear  { get; set; }
+        public required string Cvc      { get; set; }
+    }
+    
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Recipt Validation
     
     /// /validate_receipt
