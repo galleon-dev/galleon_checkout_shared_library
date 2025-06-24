@@ -167,9 +167,10 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class ChargeResponse
     {
-        public bool            Status      { get; set; }
-        public string?         PaymentId   { get; set; }
-        public PaymentAction[] NextActions { get; set; }
+        public bool                  Status             { get; set; }
+        public string?               PaymentId          { get; set; }
+        public TransactionResultData transaction_result { get; set; }
+        public PaymentAction[]       NextActions        { get; set; }
     }
     
     //// Helper Types
@@ -177,10 +178,26 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class Card
     {
-        public required string Number   { get; set; }
-        public required string ExpMonth { get; set; }
-        public required string ExpYear  { get; set; }
-        public required string Cvc      { get; set; }
+        public string Number   { get; set; }
+        public string ExpMonth { get; set; }
+        public string ExpYear  { get; set; }
+        public string Cvc      { get; set; }
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Socket Actions
+    
+    [Serializable]
+    public class ServerSocketRequest
+    {
+        public string action { get; set; }
+    }
+    
+    
+    [Serializable]
+    public class ServerSocketResponse
+    {
+        public string socket_ip   { get; set; }
+        public string socket_port { get; set; }
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Recipt Validation
