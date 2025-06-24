@@ -197,7 +197,7 @@ namespace Galleon.Checkout.Shared
     public class ServerSocketResponse
     {
         public string socket_ip   { get; set; }
-        public string socket_port { get; set; }
+        public int    socket_port { get; set; }
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Recipt Validation
