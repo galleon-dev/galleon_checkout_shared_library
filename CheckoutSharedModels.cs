@@ -2,6 +2,34 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+
+/// The file "CheckoutSharedModules.cs" is shared between the server project (apt.net project) and the client (unity project)
+/// it defines the namespace "Galleon.Checkout.Shared"
+/// in it are many public serializable data classes that act the the contracts for requests and responses between server and client.
+/// All contracts for this API must sit in this single file.
+/// the syntax must be c#8 syntax, compaatible with unity 2021.3.
+/// so for example - no "required" modifier.
+/// 
+/// example of a request and resposnse :
+/// /// /authenticate example :
+///    
+///    [Serializable]
+///    public class AuthenticateRequest
+///    {
+///        public string AppID  { get; set; }
+///        public string ID     { get; set; }
+///        public string Device { get; set; }
+///    }
+///
+/// [Serializable]
+/// public class AuthenticateResponse
+/// {
+///     public string accessToken { get; set; }
+///     public string appID       { get; set; }
+///     public string id          { get; set; }
+///     public string externalId  { get; set; }
+/// }
+
 namespace Galleon.Checkout.Shared
 {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Authentication
