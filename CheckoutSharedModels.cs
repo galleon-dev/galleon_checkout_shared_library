@@ -153,7 +153,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class PaymentAction
     {
-        public string action { get; set; }
+        public string action     { get; set; }
+        public object parameters { get; set; }
     }
     
     [Serializable]
