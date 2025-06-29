@@ -85,6 +85,39 @@ namespace Galleon.Checkout.Shared
         public Dictionary<string, string> values { get; set; }
     }
     
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Payment Method Definitions
+    
+    [Serializable]
+    public class PaymentMethodDefinitionsResponse
+    {
+        public PaymentMethodData[] payment_methods { get; set; }    
+    }
+    
+    [Serializable]
+    public partial class PaymentMethodDefinitionData
+    {
+        public string          type                   { get; set; }
+        public PaymentAction[] initialization_actions { get; set; }    
+        public PaymentAction[] vaulting_actions       { get; set; }    
+        public PaymentAction[] transaction_actions    { get; set; }    
+    }
+    
+    [Serializable]
+    public class CreditCardPaymentMethodDefinitionData : PaymentMethodDefinitionData
+    {
+        public string[] supported_card_types { get; set; }
+    }
+    [Serializable]
+    public class GooglePayPaymentMethodDefinitionData : PaymentMethodDefinitionData
+    {
+        public string google_pay_token { get; set; }
+    }
+    [Serializable]
+    public class PaypalPaymentMethodDefinitionData : PaymentMethodDefinitionData
+    {
+        public string paypal_token { get; set; }
+    }
+    
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Payment Methods
     
     [Serializable]
