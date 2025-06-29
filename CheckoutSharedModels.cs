@@ -127,7 +127,7 @@ namespace Galleon.Checkout.Shared
     }
     
     [Serializable]
-    public class PaymentMethodData
+    public partial class PaymentMethodData
     {
         public string          type                   { get; set; }
         public PaymentAction[] initialization_actions { get; set; }    
