@@ -96,10 +96,7 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public partial class PaymentMethodDefinitionData
     {
-        public string          type                   { get; set; }
-        public PaymentAction[] initialization_actions { get; set; }    
-        public PaymentAction[] vaulting_actions       { get; set; }    
-        public PaymentAction[] transaction_actions    { get; set; }    
+        public string type { get; set; }
     }
     
     [Serializable]
@@ -138,7 +135,7 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class CreditCardPaymentMethodData : PaymentMethodData
     {
-        public string[] supported_card_types { get; set; }
+        public string card_type { get; set; }
     }
     [Serializable]
     public class GooglePayPaymentMethodData : PaymentMethodData
