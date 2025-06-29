@@ -90,7 +90,7 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class PaymentMethodDefinitionsResponse
     {
-        public PaymentMethodData[] payment_methods { get; set; }    
+        public PaymentMethodDefinitionData[] payment_method_definitions { get; set; }    
     }
     
     [Serializable]
