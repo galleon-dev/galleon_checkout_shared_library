@@ -91,30 +91,27 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class PaymentMethodsResponse
     {
-        public PaymentMethodData[] payment_methods { get; set; } = new PaymentMethodData[0];
+        public UserPaymentMethod[] payment_methods { get; set; } = new UserPaymentMethod[0];
     }
     
     [Serializable]
-    public class PaymentMethodData
+    public class UserPaymentMethod
     {
-        public string          type                   { get; set; } = "";
-        public PaymentAction[] initialization_actions { get; set; } = new PaymentAction[0];
-        public PaymentAction[] vaulting_actions       { get; set; } = new PaymentAction[0];
-        public PaymentAction[] transaction_actions    { get; set; } = new PaymentAction[0];
+        public string type { get; set; } = "";
     }
     
     [Serializable]
-    public class CreditCardPaymentMethodData : PaymentMethodData
+    public class CreditCardUserPaymentMethod : UserPaymentMethod
     {
         public string[] supported_card_types { get; set; } = new string[0];
     }
     [Serializable]
-    public class GooglePayPaymentMethodData : PaymentMethodData
+    public class GooglePayUserPaymentMethod : UserPaymentMethod
     {
         public string google_pay_token { get; set; } = "";
     }
     [Serializable]
-    public class PaypalPaymentMethodData : PaymentMethodData
+    public class PaypalUserPaymentMethod : UserPaymentMethod
     {
         public string paypal_token { get; set; } = "";
     }
@@ -219,11 +216,11 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class GetPaymentMethodsResponse
     {
-        public List<AvailablePaymentMethod> paymentMethods { get; set; } = new List<AvailablePaymentMethod>();
+        public List<PaymentMethodDefinition> paymentMethods { get; set; } = new List<PaymentMethodDefinition>();
     }
     
     [Serializable]
-    public class AvailablePaymentMethod
+    public class PaymentMethodDefinition
     {
         public string              id                 { get; set; } = "";
         public string              name               { get; set; } = "";
@@ -234,6 +231,24 @@ namespace Galleon.Checkout.Shared
         public List<PaymentAction> transactionActions { get; set; } = new List<PaymentAction>();
     }
 
+    [Serializable]
+    public class CreditCardPaymentMethodDefinition : PaymentMethodDefinition
+    {
+        public string[] supported_card_types { get; set; } = new string[0];
+    }
+    
+    [Serializable]
+    public class PaypalPaymentMethodDefinition : PaymentMethodDefinition
+    {
+        
+    }
+    
+    [Serializable]
+    public class GooglePayPaymentMethodDefinition : PaymentMethodDefinition
+    {
+        
+    }
+    
     [Serializable]
     public class PaymentInitiationRequest
     {
