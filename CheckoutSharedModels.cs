@@ -79,39 +79,90 @@ namespace Galleon.Checkout.Shared
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Config
-    
+
     [Serializable]
     public class ConfigurationData
     {
         public Dictionary<string, object> values { get; set; } = new Dictionary<string, object>();
     }
-    
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Payment Methods
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Payment Method Definitions
+
     
     [Serializable]
-    public class PaymentMethodsResponse
+    public class PaymentMethodDefinitionsRequest
     {
-        public UserPaymentMethod[] payment_methods { get; set; } = new UserPaymentMethod[0];
     }
     
     [Serializable]
-    public class UserPaymentMethod
+    public class PaymentMethodDefinitionsResponse
+    {
+        public List<PaymentMethodDefinitionData> paymentMethods { get; set; } = new List<PaymentMethodDefinitionData>();
+    }
+    
+    [Serializable]
+    public partial class PaymentMethodDefinitionData
+    {
+        public string              id                 { get; set; } = "";
+        public string              name               { get; set; } = "";
+        public string              type               { get; set; } = "";
+        public string              iconUrl            { get; set; } = "";
+        public string              logoUrl            { get; set; } = "";
+        public List<PaymentAction> vaultingActions    { get; set; } = new List<PaymentAction>();
+        public List<PaymentAction> transactionActions { get; set; } = new List<PaymentAction>();
+    }
+
+    [Serializable]
+    public class CreditCardPaymentMethodDefinitionData : PaymentMethodDefinitionData
+    {
+        public string[] supported_card_types { get; set; } = new string[0];
+    }
+    
+    [Serializable]
+    public class PaypalPaymentMethodDefinitionData : PaymentMethodDefinitionData
+    {
+        
+    }
+    
+    [Serializable]
+    public class GooglePayPaymentMethodDefinitionData : PaymentMethodDefinitionData
+    {
+        
+    }
+    
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Payment Methods
+    
+    
+    [Serializable]
+    public class UserPaymentMethodsRequest
+    {
+    }
+    
+    [Serializable]
+    public class UserPaymentMethodsResponse
+    {
+        public UserPaymentMethodData[] payment_methods { get; set; } = new UserPaymentMethodData[0];
+    }
+    
+    [Serializable]
+    public partial class UserPaymentMethodData
     {
         public string type { get; set; } = "";
     }
     
     [Serializable]
-    public class CreditCardUserPaymentMethod : UserPaymentMethod
+    public class CreditCardUserPaymentMethodData : UserPaymentMethodData
     {
         public string[] supported_card_types { get; set; } = new string[0];
     }
     [Serializable]
-    public class GooglePayUserPaymentMethod : UserPaymentMethod
+    public class GooglePayUserPaymentMethodData : UserPaymentMethodData
     {
         public string google_pay_token { get; set; } = "";
     }
     [Serializable]
-    public class PaypalUserPaymentMethod : UserPaymentMethod
+    public class PaypalUserPaymentMethodData : UserPaymentMethodData
     {
         public string paypal_token { get; set; } = "";
     }
@@ -212,42 +263,6 @@ namespace Galleon.Checkout.Shared
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Unified Payment Platform
-    
-    [Serializable]
-    public class GetPaymentMethodsResponse
-    {
-        public List<PaymentMethodDefinition> paymentMethods { get; set; } = new List<PaymentMethodDefinition>();
-    }
-    
-    [Serializable]
-    public class PaymentMethodDefinition
-    {
-        public string              id                 { get; set; } = "";
-        public string              name               { get; set; } = "";
-        public string              type               { get; set; } = "";
-        public string              iconUrl            { get; set; } = "";
-        public string              logoUrl            { get; set; } = "";
-        public List<PaymentAction> vaultingActions    { get; set; } = new List<PaymentAction>();
-        public List<PaymentAction> transactionActions { get; set; } = new List<PaymentAction>();
-    }
-
-    [Serializable]
-    public class CreditCardPaymentMethodDefinition : PaymentMethodDefinition
-    {
-        public string[] supported_card_types { get; set; } = new string[0];
-    }
-    
-    [Serializable]
-    public class PaypalPaymentMethodDefinition : PaymentMethodDefinition
-    {
-        
-    }
-    
-    [Serializable]
-    public class GooglePayPaymentMethodDefinition : PaymentMethodDefinition
-    {
-        
-    }
     
     [Serializable]
     public class PaymentInitiationRequest
