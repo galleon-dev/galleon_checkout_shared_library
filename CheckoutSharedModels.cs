@@ -283,6 +283,44 @@ namespace Galleon.Checkout.Shared
         public bool                success        { get; set; } = true;
         public bool                requiresAction { get; set; } = true;
         public string              errorMessage   { get; set; } = "";
+        public TaxInfo             taxInfo        { get; set; } = new TaxInfo();
+    }
+
+    [Serializable]
+    public class GetPaymentMethodsResponse
+    {
+        public List<AvailablePaymentMethod> paymentMethods { get; set; } = new List<AvailablePaymentMethod>();
+    }
+
+    [Serializable]
+    public class AvailablePaymentMethod
+    {
+        public string              id                 { get; set; } = "";
+        public string              name               { get; set; } = "";
+        public string              type               { get; set; } = "";
+        public string              iconUrl            { get; set; } = "";
+        public string              logoUrl            { get; set; } = "";
+        public List<PaymentAction> vaultingActions    { get; set; } = new List<PaymentAction>();
+        public List<PaymentAction> transactionActions { get; set; } = new List<PaymentAction>();
+    }
+
+    [Serializable]
+    public class TaxInfo
+    {
+        public decimal             taxAmount      { get; set; }
+        public bool                taxInclusive   { get; set; }
+        public string              transactionId  { get; set; } = "";
+        public string              currency       { get; set; } = "";
+        public decimal             taxRate        { get; set; }
+        public List<TaxBreakdown>  breakdown      { get; set; } = new List<TaxBreakdown>();
+    }
+
+    [Serializable]
+    public class TaxBreakdown
+    {
+        public string  name   { get; set; } = "";
+        public decimal amount { get; set; }
+        public decimal rate   { get; set; }
     }
 
     [Serializable]
