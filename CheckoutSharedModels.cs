@@ -227,27 +227,25 @@ namespace Galleon.Checkout.Shared
         public bool     isCanceled     { get; set; }
         public string[] errors         { get; set; } = new string[0];
     }
-    
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Credit Card Actions
 
     [Serializable]
     public class ChargeRequest
     {
-        public string                     sku      { get; set; } = "";
-        public int                        quantity { get; set; }
-        public decimal                    amount   { get; set; }
-        public string                     currency { get; set; } = "";
-        public Card                       card     { get; set; } = new Card();
-        public Dictionary<string, string> metadata { get; set; } = new Dictionary<string, string>();
+        public string SessionId { get; set; } = "";
+        public bool SavePaymentMethod { get; set; }
+        public bool IsNewPaymentMethod { get; set; }
+        public PaymentMethodDetails PaymentMethod { get; set; } = new PaymentMethodDetails();
     }
 
     [Serializable]
     public class ChargeResponse
     {
-        public bool                  Status             { get; set; }
-        public string                PaymentId          { get; set; } = "";
-        public TransactionResultData transaction_result { get; set; } = new TransactionResultData();
-        public PaymentAction[]       NextActions        { get; set; } = new PaymentAction[0];
+        public bool Success { get; set; }
+        public string[] Errors { get; set; } = new string[0];
+        public string ChargetId { get; set; } = "";
+        public PaymentAction[] NextActions { get; set; } = new PaymentAction[0];
     }
     
     //// Helper Types
@@ -263,6 +261,20 @@ namespace Galleon.Checkout.Shared
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Unified Payment Platform
     
+    [Serializable]
+    public class CreatecheckoutSessionRequest
+    {
+        public OrderDetails Order     { get; set; }
+        public DateTime     ExpiresAt { get; set; }
+    }
+
+    [Serializable]
+    public class CreateCheckoutSessionResponse
+    {
+        public string SessionId    { get; set; } = "";
+        public bool   Success      { get; set; } = true;
+        public string ErrorMessage { get; set; } = "";
+    }
     
     [Serializable]
     public class PaymentInitiationRequest
