@@ -260,8 +260,9 @@ namespace Galleon.Checkout.Shared
         public string expYear  { get; set; } = "";
         public string cvc      { get; set; } = "";
     }
-    
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Unified Payment Platform
+    
     
     [Serializable]
     public class PaymentInitiationRequest
