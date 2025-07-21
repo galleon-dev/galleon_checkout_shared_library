@@ -262,7 +262,7 @@ namespace Galleon.Checkout.Shared
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Unified Payment Platform
     
     [Serializable]
-    public class CreatecheckoutSessionRequest
+    public class CreateCheckoutSessionRequest
     {
         public OrderDetails Order     { get; set; }
         public DateTime     ExpiresAt { get; set; }
