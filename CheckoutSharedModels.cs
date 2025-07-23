@@ -244,7 +244,7 @@ namespace Galleon.Checkout.Shared
     {
         public bool Success { get; set; }
         public string[] Errors { get; set; } = new string[0];
-        public string ChargetId { get; set; } = "";
+        public string ChargeId { get; set; } = "";
         public PaymentAction[] NextActions { get; set; } = new PaymentAction[0];
     }
     
