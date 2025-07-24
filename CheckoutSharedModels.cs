@@ -104,6 +104,8 @@ namespace Galleon.Checkout.Shared
     public partial class PaymentMethodDefinitionData
     {
         public string              id                 { get; set; } = "";
+        public string              providerId         { get; set; } = "";
+        public string              providerName       { get; set; } = "";
         public string              name               { get; set; } = "";
         public string              type               { get; set; } = "";
         public string              iconUrl            { get; set; } = "";
