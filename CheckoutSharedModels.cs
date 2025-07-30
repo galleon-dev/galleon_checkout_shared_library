@@ -273,9 +273,18 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class CreateCheckoutSessionResponse
     {
-        public string SessionId    { get; set; } = "";
-        public bool   Success      { get; set; } = true;
-        public string ErrorMessage { get; set; } = "";
+        public string    SessionId    { get; set; } = "";
+        public bool      Success      { get; set; } = true;
+        public string    ErrorMessage { get; set; } = "";
+        public PriceData PriceData    { get; set; } = new PriceData();
+    }
+    
+    [Serializable]
+    public class PriceData
+    {
+        public decimal total_price    { get; set; }
+        public decimal subtotal_price { get; set; }
+        public TaxData tax            { get; set; }
     }
     
     [Serializable]
@@ -384,15 +393,22 @@ namespace Galleon.Checkout.Shared
     ///     should_display_price_including_tax : false,
     ///     taxes                              :
     ///                                        {
-    ///                                            "general tax" : 18,
-    ///                                            "IRS"         : 2,         
+    ///                                            "Tax" : { 4.99, true  },
+    ///                                            "IRS" : { 2,    fa;se }         
     ///                                        }
     /// }
     [Serializable]
     public class TaxData
     {
-        public bool                      should_display_price_including_tax { get; set; }
-        public Dictionary<string, float> taxes                              { get; set; } = new Dictionary<string, float>();
+        public bool                        should_display_price_including_tax { get; set; }
+        public Dictionary<string, TaxItem> taxes                              { get; set; } = new();
+    }
+    
+    [Serializable]
+    public class TaxItem
+    {
+        public decimal tax_amount { get; set; }
+        public bool    inclusive  { get; set; }
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Email
