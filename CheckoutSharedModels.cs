@@ -235,18 +235,18 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class ChargeRequest
     {
-        public string SessionId { get; set; } = "";
-        public bool SavePaymentMethod { get; set; }
-        public bool IsNewPaymentMethod { get; set; }
-        public PaymentMethodDetails PaymentMethod { get; set; } = new PaymentMethodDetails();
+        public string               SessionId          { get; set; } = "";
+        public bool                 SavePaymentMethod  { get; set; }
+        public bool                 IsNewPaymentMethod { get; set; }
+        public PaymentMethodDetails PaymentMethod      { get; set; } = new PaymentMethodDetails();
     }
 
     [Serializable]
     public class ChargeResponse
     {
-        public bool Success { get; set; }
-        public string[] Errors { get; set; } = new string[0];
-        public string ChargeId { get; set; } = "";
+        public bool            Success     { get; set; }
+        public string[]        Errors      { get; set; } = new string[0];
+        public string          ChargeId    { get; set; } = "";
         public PaymentAction[] NextActions { get; set; } = new PaymentAction[0];
     }
     
