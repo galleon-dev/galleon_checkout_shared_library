@@ -247,6 +247,7 @@ namespace Galleon.Checkout.Shared
         public bool            Success     { get; set; }
         public string[]        Errors      { get; set; } = new string[0];
         public string          ChargeId    { get; set; } = "";
+        public string          PaymentMethodId    { get; set; } = "";
         public PaymentAction[] NextActions { get; set; } = new PaymentAction[0];
     }
     
@@ -262,12 +263,13 @@ namespace Galleon.Checkout.Shared
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Unified Payment Platform
-    
+
     [Serializable]
     public class CreateCheckoutSessionRequest
     {
-        public OrderDetails Order     { get; set; }
-        public DateTime     ExpiresAt { get; set; }
+        public OrderDetails Order { get; set; }
+        public DateTime ExpiresAt { get; set; }
+        public Dictionary<string, string> Metadata  { get; set; }
     }
 
     [Serializable]
