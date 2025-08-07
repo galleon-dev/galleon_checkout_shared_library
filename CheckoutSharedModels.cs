@@ -43,9 +43,9 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class AuthenticateRequest
     {
-        public string AppID  { get; set; } = "";
-        public string ID     { get; set; } = "";
-        public string Device { get; set; } = "";
+        public string app_id { get; set; } = "";
+        public string id     { get; set; } = "";
+        public string device { get; set; } = "";
     }
     
     /// /authenticate Response example :
@@ -58,10 +58,10 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class AuthenticateResponse
     {
-        public string accessToken { get; set; } = "";
-        public string appID       { get; set; } = "";
-        public string id          { get; set; } = "";
-        public string externalId  { get; set; } = "";
+        public string access_token { get; set; } = "";
+        public string app_id       { get; set; } = "";
+        public string id           { get; set; } = "";
+        public string external_id  { get; set; } = "";
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Initialization
@@ -231,27 +231,39 @@ namespace Galleon.Checkout.Shared
     }
     
     
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// vaulting
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Vaulting
     
+    /// ADD-CREDIT-CARD Example :
+    /// {
+    ///     "payment_method_definition_type" : "credit_card",
+    ///     "credit_card_token"              : "1234"
+    /// }
+    /// ADD-OTHER-PAYMENT-METHOD Example :
+    /// {
+    ///     "payment_method_definition_type" : "paypal",
+    ///     "credit_card_token"              : null
+    /// }
     [Serializable]
-    public class AddCardRequest
+    public class AddPaymentMethodRequest
     {
-        public string credit_card_token { get; set; } = "";
+        public string payment_method_definition_type { get; set; } = "";
+        public string credit_card_token              { get; set; } = "";
     }
     
     [Serializable]
-    public class AddCardResponse
-    {   
-    }
-    
-    [Serializable]
-    public class RemoveCardRequest
+    public class AddPaymentMethodResponse
     {
-        public string credit_card_token { get; set; } = "";
+        public UserPaymentMethodData created_payment_method;
     }
     
     [Serializable]
-    public class RemoveCardResponse
+    public class RemovePaymentMethodRequest
+    {
+        public string payment_method_id { get; set; } = "";
+    }
+    
+    [Serializable]
+    public class RemovePaymentMethodResponse
     {
     }
     
@@ -270,14 +282,15 @@ namespace Galleon.Checkout.Shared
     ///                       [
     ///                           {
     ///                               "type"             : "credit_card",
-    ///                               "id"               : "4",
+    ///                               "id"               : "424563487tukviu6rc5l875vl87i",
     ///                               "display_name"     : "Master Card - **** - 1234",
     ///
-    ///                               "credit_card_type" : "master_card"
+    ///                               "credit_card_type" : "master_card",
+    ///                               "expiration_date"  : "2025-12-31T23:59:59"
     ///                           },
     ///                           {
     ///                               "type"             : "google_pay",
-    ///                               "id"               : "5",
+    ///                               "id"               : "5i764vio764oi75fo75co765fi765vo",
     ///                               "display_name"     : "GPay - jhon.doe@gmail.com"
     ///                           },
     ///                       ]
@@ -299,7 +312,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class CreditCardUserPaymentMethodData : UserPaymentMethodData
     {
-        public string credit_card_type;
+        public string   credit_card_type;
+        public DateTime expiration_date;
     }
     [Serializable]
     public class GooglePayUserPaymentMethodData : UserPaymentMethodData
@@ -327,16 +341,22 @@ namespace Galleon.Checkout.Shared
     ///                  {
     ///                      "sku"      : "1234",
     ///                      "currency" : "USD",
-    ///                      "amount"   : "4.99",
-    ///                      "quantity" : "1"
+    ///                      "amount"   : "4.99"
     ///                  },
-    ///     "expires_at" : "2025/12/31 23:59"
+    ///     "expires_at" : "2025-12-31T23:59:59",
+    ///     "metadata"   :
+    ///                  {
+    ///                      "my_field_1" : "my_value",
+    ///                      "my_field_2" : "my_value",
+    ///                      "my_field_3" : "my_value"
+    ///                  }
     /// }
     [Serializable]
-    public class CreateCheckoutSessionRequest
+    public class CheckoutSessionRequest
     {
-        public OrderDetails order      { get; set; }
-        public DateTime     expires_at { get; set; }
+        public OrderDetails               order      { get; set; }
+        public DateTime                   expires_at { get; set; }
+        public Dictionary<string, string> metadata   { get; set; }
     }
 
     /// Response Example :
@@ -345,23 +365,36 @@ namespace Galleon.Checkout.Shared
     ///     "price_data" :
     ///                  {
     ///                      "total_price"     : 9.99,
-    ///                      "sub_total_price" : 5.99,
+    ///                      "subtotal_price"  : 5.99,
     ///                      "tax"             :
     ///                                        {
-    ///                                            should_display_price_including_tax : false,
-    ///                                            taxes                              :
-    ///                                                                               {
-    ///                                                                                   "Tax" : { 4.99, true  },
-    ///                                                                                   "IRS" : { 2,    false }         
-    ///                                                                               }
+    ///                                            should_display_taxes : true,
+    ///                                            taxes                :
+    ///                                                                 {
+    ///                                                                     "Tax" : { 4.99, true  }, // true  = "inclusive"     = this item is pat of the subtotal
+    ///                                                                     "IRS" : { 2,    false }  // false = "not inclusive" = outside of subtotal
+    ///                                                                 }
     ///                                        }
-    ///                  }
+    ///                  },
+    /// 
+    ///     "order"      :
+    ///                  {
+    ///                      "sku"      : "1234",
+    ///                      "currency" : "USD",
+    ///                      "amount"   : "4.99"
+    ///                  },
+    ///     "expires_at" : "2025-12-31T23:59:59",
+    ///     "status"     : "created" (/"in_progress"/"cancelled"/"whatever")
     /// }
     [Serializable]
-    public class CreateCheckoutSessionResponse
+    public class CheckoutSessionResponse
     {
-        public string    session_id    { get; set; } = "";
-        public PriceData price_data    { get; set; } = new PriceData();
+        public string       session_id    { get; set; } = "";
+        public PriceData    price_data    { get; set; } = new PriceData();
+        
+        public OrderDetails order         { get; set; }
+        public DateTime     expires_at    { get; set; }
+        public string       status        { get; set; } = "";
     }
     
     
@@ -371,7 +404,6 @@ namespace Galleon.Checkout.Shared
         public string  sku      { get; set; }
         public string  currency { get; set; }
         public decimal amount   { get; set; }
-        public int     quantity { get; set; }
     }
     
     
@@ -388,8 +420,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class TaxData
     {
-        public bool                        should_display_price_including_tax { get; set; }
-        public Dictionary<string, TaxItem> taxes                              { get; set; } = new();
+        public bool                        should_display_taxes { get; set; }
+        public Dictionary<string, TaxItem> taxes                { get; set; } = new();
     }
     
     [Serializable]
@@ -410,9 +442,13 @@ namespace Galleon.Checkout.Shared
     ///                             {
     ///                                 "data" :
     ///                                        {
-    ///                                            "type"  : "credit_card" // type of the payment method definition
-    ///                                            "token" : "1234"
+    ///                                            "type"  : "credit_card"      // type of the payment method definition
+    ///                                            "token" : "3o84756hb3975f"
     ///                                        }
+    ///                             },
+    ///     "metadata"              :
+    ///                             {
+    ///                                 "my_field" : "my_value"
     ///                             }
     /// }
     /// /////////// EXISTING-PAYMENT-METHOD Request Example :
@@ -423,15 +459,20 @@ namespace Galleon.Checkout.Shared
     ///     "payment_method"        :
     ///                             {
     ///                                 "id" : "4"
+    ///                             },
+    ///     "metadata"              :
+    ///                             {
+    ///                                 "my_field" : "my_value"
     ///                             }
     /// }
     [Serializable]
     public class ChargeRequest
     {
-        public string               session_id            { get; set; } = "";
-        public bool                 save_payment_method   { get; set; }
-        public bool                 is_new_payment_method { get; set; }
-        public PaymentMethodDetails payment_method        { get; set; } = new PaymentMethodDetails();
+        public string                     session_id            { get; set; } = "";
+        public bool                       save_payment_method   { get; set; }
+        public bool                       is_new_payment_method { get; set; }
+        public PaymentMethodDetails       payment_method        { get; set; } = new PaymentMethodDetails();
+        public Dictionary<string, string> metadata              { get; set; }
     }
 
     /// Response Example :
@@ -446,9 +487,13 @@ namespace Galleon.Checkout.Shared
     ///     "next_actions" :
     ///                    [
     ///                         {
-    ///                             "action"     : "3ds",
-    ///                             "parameters" : { "field" : "value" } 
-    ///                         }
+    ///                             "action"     : "open_url",        // (3ds)
+    ///                             "parameters" :
+    ///                                          {
+    ///                                              "url"            : "https://blablabla.com"
+    ///                                              "socket_address" : "https://socket_address" (optional)
+    ///                                          }
+    ///                             }
     ///                    ] 
     /// }
     [Serializable]
@@ -471,15 +516,6 @@ namespace Galleon.Checkout.Shared
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Helper Types
     
     [Serializable]
-    public class Card
-    {
-        public string number   { get; set; } = "";
-        public string expMonth { get; set; } = "";
-        public string expYear  { get; set; } = "";
-        public string cvc      { get; set; } = "";
-    }
-    
-    [Serializable]
     public class PaymentMethodDetails
     {
         public string                     id   { get; set; }
@@ -491,8 +527,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class UpdateEmailRequest
     {
-        public string user_id { get; set; } = "";
-        public string email   { get; set; } = "";
+        public string session_id { get; set; } = "";
+        public string email      { get; set; } = "";
     }
     
     [Serializable]
