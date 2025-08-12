@@ -92,6 +92,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class PaymentMethodDefinitionsRequest
     {
+        public string currency_code { get; set; }
+        public string country       { get; set; }
     }
     
     /// Response Example :
@@ -304,9 +306,10 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public partial class UserPaymentMethodData
     {
-        public string type         { get; set; } = "";
-        public string id           { get; set; } = "";
-        public string display_name { get; set; } = "";
+        public string type             { get; set; } = "";
+        public string id               { get; set; } = "";
+        public string display_name     { get; set; } = "";
+        public string credit_card_type { get; set; } = "";
     }
     
     [Serializable]
