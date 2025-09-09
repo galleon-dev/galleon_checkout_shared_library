@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-
 /// The file "CheckoutSharedModules.cs" is shared between the server project (apt.net project) and the client (unity project)
 /// it defines the namespace "Galleon.Checkout.Shared"
 /// in it are many public serializable data classes that act the the contracts for requests and responses between server and client.
@@ -102,14 +101,10 @@ namespace Galleon.Checkout.Shared
     ///     [
     ///         {
     ///             "type"                   : "credit_card",
-    /// 
     ///             "supported_card_types"   : [ "visa", "master_card", "..." ],
-    /// 
     ///             "icon_url"               : "http://blablabla.png"
     ///             "logo_url"               : "http://blablabla.png"
-    /// 
     ///             "initialization_actions" : null,
-    /// 
     ///             "vaulting_actions"       :
     ///                                      [
     ///                                           {
@@ -121,7 +116,6 @@ namespace Galleon.Checkout.Shared
     ///                                               "parameters" : null
     ///                                           },
     ///                                      ],
-    /// 
     ///             "charge_actions"         :
     ///                                      [
     ///                                          { "action" : "charge" }
@@ -129,14 +123,10 @@ namespace Galleon.Checkout.Shared
     ///         },
     ///         {
     ///             "type"                   : "google_pay",
-    /// 
     ///             "icon_url"               : "http://blablabla.png"
     ///             "logo_url"               : "http://blablabla.png"
-    /// 
     ///             "initialization_actions" : [ { "action" : "check_google_pay_availability" } ],
-    /// 
     ///             "vaulting_actions"       : null,
-    /// 
     ///             "charge_actions"         :
     ///                                      [
     ///                                          {
@@ -163,14 +153,16 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public partial class PaymentMethodDefinitionData
     {
-        public string              type                     { get; set; } = "";
+        public string                type                     { get; set; } = "";
         
-        public string              icon_url                 { get; set; } = "";
-        public string              logo_url                 { get; set; } = "";
+        public List<PaymentProvider> providers                { get; set; } = new List<PaymentProvider>();
         
-        public List<PaymentAction> initialization_actions   { get; set; } = new List<PaymentAction>();
-        public List<PaymentAction> vaulting_actions         { get; set; } = new List<PaymentAction>();
-        public List<PaymentAction> charge_actions           { get; set; } = new List<PaymentAction>();
+        public string                icon_url                 { get; set; } = "";
+        public string                logo_url                 { get; set; } = "";
+        
+        public List<PaymentAction>   initialization_actions   { get; set; } = new List<PaymentAction>();
+        public List<PaymentAction>   vaulting_actions         { get; set; } = new List<PaymentAction>();
+        public List<PaymentAction>   charge_actions           { get; set; } = new List<PaymentAction>();
     }
 
     [Serializable]
@@ -191,6 +183,13 @@ namespace Galleon.Checkout.Shared
         
     }
     
+    
+    [Serializable]
+    public class PaymentProvider
+    {
+        public string                     provider { get; set; } = "";
+        public Dictionary<string, object> config   { get; set; } = new();
+    }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Tokenization
     
@@ -400,6 +399,15 @@ namespace Galleon.Checkout.Shared
         public string       status        { get; set; } = "";
     }
     
+    [Serializable]
+    public class CancelCheckoutSessionRequest
+    {
+        public string session_id { get; set; } = "";
+    }
+    [Serializable]
+    public class CancelCheckoutSessionResponse
+    {
+    }
     
     [Serializable]
     public class OrderDetails
