@@ -392,12 +392,12 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class CheckoutSessionResponse
     {
-        [Preserve] public string       session_id    { get; set; } = "";
-        [Preserve] public PriceData    price_data    { get; set; } = new PriceData();
+        [Preserve] public string       session_id    = "";
+        [Preserve] public PriceData    price_data    = new PriceData();
         
-        [Preserve] public OrderDetails order         { get; set; }
-        [Preserve] public DateTime     expires_at    { get; set; }
-        [Preserve] public string       status        { get; set; } = "";
+        [Preserve] public OrderDetails order;         
+        [Preserve] public DateTime     expires_at;    
+        [Preserve] public string       status         = "";
     }
     
     [Serializable]
@@ -413,18 +413,18 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class OrderDetails
     {
-        [Preserve] public string  sku      { get; set; }
-        [Preserve] public string  currency { get; set; }
-        [Preserve] public decimal amount   { get; set; }
+        [Preserve] public string  sku;      
+        [Preserve] public string  currency; 
+        [Preserve] public decimal amount;   
     }
     
     
     [Serializable]
     public class PriceData
     {
-        [Preserve] public decimal total_price    { get; set; }
-        [Preserve] public decimal subtotal_price { get; set; }
-        [Preserve] public TaxData tax            { get; set; }
+        [Preserve] public decimal total_price;    
+        [Preserve] public decimal subtotal_price; 
+        [Preserve] public TaxData tax;            
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Tax Helper Classes
@@ -432,8 +432,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class TaxData
     {
-        public bool                        should_display_taxes { get; set; }
-        public Dictionary<string, TaxItem> taxes                { get; set; } = new();
+        public bool                        should_display_taxes;
+        public Dictionary<string, TaxItem> taxes                 = new();
     }
     
     [Serializable]
