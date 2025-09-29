@@ -392,12 +392,12 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class CheckoutSessionResponse
     {
-        [Preserve] public string       session_id    = "";
-        [Preserve] public PriceData    price_data    = new PriceData();
+        public string       session_id    = "";
+        public PriceData    price_data    = new PriceData();
         
-        [Preserve] public OrderDetails order;         
-        [Preserve] public DateTime     expires_at;    
-        [Preserve] public string       status         = "";
+        public OrderDetails order;         
+        public DateTime     expires_at;    
+        public string       status         = "";
     }
     
     [Serializable]
@@ -413,18 +413,18 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class OrderDetails
     {
-        [Preserve] public string  sku;      
-        [Preserve] public string  currency; 
-        [Preserve] public decimal amount;   
+        public string  sku;      
+        public string  currency; 
+        public decimal amount;   
     }
     
     
     [Serializable]
     public class PriceData
     {
-        [Preserve] public decimal total_price;    
-        [Preserve] public decimal subtotal_price; 
-        [Preserve] public TaxData tax;            
+        public decimal total_price;    
+        public decimal subtotal_price; 
+        public TaxData tax;            
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Tax Helper Classes
