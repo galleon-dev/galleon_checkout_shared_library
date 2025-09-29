@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Scripting;
 
 /// The file "CheckoutSharedModules.cs" is shared between the server project (apt.net project) and the client (unity project)
 /// it defines the namespace "Galleon.Checkout.Shared"
@@ -391,12 +392,12 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class CheckoutSessionResponse
     {
-        public string       session_id    { get; set; } = "";
-        public PriceData    price_data    { get; set; } = new PriceData();
+        [Preserve] public string       session_id    { get; set; } = "";
+        [Preserve] public PriceData    price_data    { get; set; } = new PriceData();
         
-        public OrderDetails order         { get; set; }
-        public DateTime     expires_at    { get; set; }
-        public string       status        { get; set; } = "";
+        [Preserve] public OrderDetails order         { get; set; }
+        [Preserve] public DateTime     expires_at    { get; set; }
+        [Preserve] public string       status        { get; set; } = "";
     }
     
     [Serializable]
@@ -412,18 +413,18 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class OrderDetails
     {
-        public string  sku      { get; set; }
-        public string  currency { get; set; }
-        public decimal amount   { get; set; }
+        [Preserve] public string  sku      { get; set; }
+        [Preserve] public string  currency { get; set; }
+        [Preserve] public decimal amount   { get; set; }
     }
     
     
     [Serializable]
     public class PriceData
     {
-        public decimal total_price    { get; set; }
-        public decimal subtotal_price { get; set; }
-        public TaxData tax            { get; set; }
+        [Preserve] public decimal total_price    { get; set; }
+        [Preserve] public decimal subtotal_price { get; set; }
+        [Preserve] public TaxData tax            { get; set; }
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Tax Helper Classes
