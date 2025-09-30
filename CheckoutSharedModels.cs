@@ -216,7 +216,7 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class GetTokenizerResponse
     {
-        public TokenizerData tokenizer_data { get; set; }
+        public TokenizerData tokenizer_data;
     }
     
     public class TokenizerData
@@ -300,7 +300,7 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class UserPaymentMethodsResponse
     {
-        public UserPaymentMethodData[] payment_methods { get; set; } = new UserPaymentMethodData[0];
+        public UserPaymentMethodData[] payment_methods = new UserPaymentMethodData[0];
     }
     
     [Serializable]
