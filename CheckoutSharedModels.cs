@@ -16,18 +16,18 @@ using UnityEngine.Scripting;
 ///    [Serializable]
 ///    public class AuthenticateRequest
 ///    {
-///        public string AppID  { get; set; }
-///        public string ID     { get; set; }
-///        public string Device { get; set; }
+///        public string AppID;  
+///        public string ID;     
+///        public string Device; 
 ///    }
 ///
 ///    [Serializable]
 ///    public class AuthenticateResponse
 ///    {
-///        public string accessToken { get; set; }
-///        public string appID       { get; set; }
-///        public string id          { get; set; }
-///        public string externalId  { get; set; }
+///        public string accessToken; 
+///        public string appID;       
+///        public string id;          
+///        public string externalId;  
 ///    }
 
 namespace Galleon.Checkout.Shared
@@ -43,9 +43,9 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class AuthenticateRequest
     {
-        public string app_id { get; set; } = "";
-        public string id     { get; set; } = "";
-        public string device { get; set; } = "";
+        public string app_id = "";
+        public string id     = "";
+        public string device = "";
     }
     
     /// /authenticate Response example :
@@ -58,10 +58,10 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class AuthenticateResponse
     {
-        public string access_token { get; set; } = "";
-        public string app_id       { get; set; } = "";
-        public string id           { get; set; } = "";
-        public string external_id  { get; set; } = "";
+        public string access_token = "";
+        public string app_id       = "";
+        public string id           = "";
+        public string external_id  = "";
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Initialization
@@ -69,13 +69,13 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class InitializationRequest
     {
-        public string access_token { get; set; } = "";
+        public string access_token = "";
     }
     
     [Serializable]
     public class InitializationResponse
     {
-        public ConfigurationData configuration { get; set; } = new ConfigurationData();
+        public ConfigurationData configuration = new ConfigurationData();
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Config
@@ -83,7 +83,7 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class ConfigurationData
     {
-        public Dictionary<string, object> values { get; set; } = new Dictionary<string, object>();
+        public Dictionary<string, object> values = new Dictionary<string, object>();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Payment Method Definitions
@@ -92,8 +92,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class PaymentMethodDefinitionsRequest
     {
-        public string currency_code { get; set; }
-        public string country       { get; set; }
+        public string currency_code; 
+        public string country;       
     }
     
     /// Response Example :
@@ -148,28 +148,28 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class PaymentMethodDefinitionsResponse
     {
-        public List<PaymentMethodDefinitionData> definitions { get; set; } = new List<PaymentMethodDefinitionData>();
+        public List<PaymentMethodDefinitionData> definitions = new List<PaymentMethodDefinitionData>();
     }
     
     [Serializable]
     public partial class PaymentMethodDefinitionData
     {
-        public string                type                     { get; set; } = "";
+        public string                type                   = "";
         
-        public List<PaymentProvider> providers                { get; set; } = new List<PaymentProvider>();
+        public List<PaymentProvider> providers              = new List<PaymentProvider>();
         
-        public string                icon_url                 { get; set; } = "";
-        public string                logo_url                 { get; set; } = "";
+        public string                icon_url               = "";
+        public string                logo_url               = "";
         
-        public List<PaymentAction>   initialization_actions   { get; set; } = new List<PaymentAction>();
-        public List<PaymentAction>   vaulting_actions         { get; set; } = new List<PaymentAction>();
-        public List<PaymentAction>   charge_actions           { get; set; } = new List<PaymentAction>();
+        public List<PaymentAction>   initialization_actions = new List<PaymentAction>();
+        public List<PaymentAction>   vaulting_actions       = new List<PaymentAction>();
+        public List<PaymentAction>   charge_actions         = new List<PaymentAction>();
     }
 
     [Serializable]
     public class CreditCardPaymentMethodDefinitionData : PaymentMethodDefinitionData
     {
-        public string[] supported_card_types { get; set; } = new string[0];
+        public string[] supported_card_types = new string[0];
     }
     
     [Serializable]
@@ -188,8 +188,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class PaymentProvider
     {
-        public string                     provider { get; set; } = "";
-        public Dictionary<string, object> config   { get; set; } = new();
+        public string                     provider = "";
+        public Dictionary<string, object> config   = new();
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Tokenization
@@ -248,8 +248,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class AddPaymentMethodRequest
     {
-        public string payment_method_definition_type { get; set; } = "";
-        public string credit_card_token              { get; set; } = "";
+        public string payment_method_definition_type = "";
+        public string credit_card_token              = "";
     }
     
     [Serializable]
@@ -261,7 +261,7 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class RemovePaymentMethodRequest
     {
-        public string payment_method_id { get; set; } = "";
+        public string payment_method_id = "";
     }
     
     [Serializable]
@@ -306,10 +306,10 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public partial class UserPaymentMethodData
     {
-        public string type             { get; set; } = "";
-        public string id               { get; set; } = "";
-        public string display_name     { get; set; } = "";
-        public string credit_card_type { get; set; } = "";
+        public string type             = "";
+        public string id               = "";
+        public string display_name     = "";
+        public string credit_card_type = "";
     }
     
     [Serializable]
@@ -332,8 +332,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class PaymentAction
     {
-        public string                     action     { get; set; } = "";
-        public Dictionary<string, object> parameters { get; set; } = new Dictionary<string, object>();
+        public string                     action     = "";
+        public Dictionary<string, object> parameters = new Dictionary<string, object>();
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Session
@@ -357,9 +357,9 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class CheckoutSessionRequest
     {
-        public OrderDetails               order      { get; set; }
-        public DateTime                   expires_at { get; set; }
-        public Dictionary<string, string> metadata   { get; set; }
+        public OrderDetails               order;      
+        public DateTime                   expires_at; 
+        public Dictionary<string, string> metadata;   
     }
 
     /// Response Example :
@@ -403,7 +403,7 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class CancelCheckoutSessionRequest
     {
-        public string session_id { get; set; } = "";
+        public string session_id = "";
     }
     [Serializable]
     public class CancelCheckoutSessionResponse
@@ -439,8 +439,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class TaxItem
     {
-        public decimal tax_amount { get; set; }
-        public bool    inclusive  { get; set; }
+        public decimal tax_amount;
+        public bool    inclusive;
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Charge
@@ -480,11 +480,11 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class ChargeRequest
     {
-        public string                     session_id            { get; set; } = "";
-        public bool                       save_payment_method   { get; set; }
-        public bool                       is_new_payment_method { get; set; }
-        public PaymentMethodDetails       payment_method        { get; set; } = new PaymentMethodDetails();
-        public Dictionary<string, string> metadata              { get; set; }
+        public string                     session_id             = "";
+        public bool                       save_payment_method;   
+        public bool                       is_new_payment_method; 
+        public PaymentMethodDetails       payment_method         = new PaymentMethodDetails();
+        public Dictionary<string, string> metadata;              
     }
 
     /// Response Example :
@@ -511,18 +511,18 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class ChargeResponse
     {
-        public ChargeResultData  result       { get; set; }
-        public PaymentAction[]   next_actions { get; set; } = new PaymentAction[0];
+        public ChargeResultData  result;      
+        public PaymentAction[]   next_actions = new PaymentAction[0];
     }
     
     
     [Serializable]
     public class ChargeResultData
     {
-        public string   charge_id       { get; set; } = "";
-        public bool     is_success      { get; set; }
-        public bool     is_canceled     { get; set; }
-        public string[] errors          { get; set; } = new string[0];
+        public string   charge_id        = "";
+        public bool     is_success;     
+        public bool     is_canceled;     
+        public string[] errors           = new string[0];
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Helper Types
@@ -530,8 +530,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class PaymentMethodDetails
     {
-        public string                     id   { get; set; }
-        public Dictionary<string, object> data { get; set; }
+        public string                     id;   
+        public Dictionary<string, object> data; 
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Email
@@ -539,8 +539,8 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class UpdateEmailRequest
     {
-        public string session_id { get; set; } = "";
-        public string email      { get; set; } = "";
+        public string session_id = "";
+        public string email      = "";
     }
     
     [Serializable]
