@@ -548,5 +548,13 @@ namespace Galleon.Checkout.Shared
     public class UpdateEmailResponse
     {
     }
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// User Data
+    
+    [Serializable]
+    public class UserInfo
+    {
+        public string email = "";
+    }
 }
 
