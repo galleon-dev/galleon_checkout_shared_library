@@ -485,7 +485,7 @@ namespace Galleon.Checkout.Shared
         public bool                       is_new_payment_method; 
         public PaymentMethodDetails       payment_method         = new PaymentMethodDetails();
         public Dictionary<string, string> metadata;
-        public string                     success_redirect_url;
+        public string                     return_url;
     }
 
     /// Response Example :
