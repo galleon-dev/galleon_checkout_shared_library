@@ -154,16 +154,21 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public partial class PaymentMethodDefinitionData
     {
-        public string                type                   = "";
+        public string                type                               = "";
         
-        public List<PaymentProvider> providers              = new List<PaymentProvider>();
+        public string                display_name                       = "";
         
-        public string                icon_url               = "";
-        public string                logo_url               = "";
+        public bool                  display_empty_upm_in_checkout_page = false;
+        public string                selection_page_upms_display_mode   = "default";
         
-        public List<PaymentAction>   initialization_actions = new List<PaymentAction>();
-        public List<PaymentAction>   vaulting_actions       = new List<PaymentAction>();
-        public List<PaymentAction>   charge_actions         = new List<PaymentAction>();
+        public List<PaymentProvider> providers                          = new List<PaymentProvider>();
+        
+        public string                icon_url                           = "";
+        public string                logo_url                           = "";
+        
+        public List<PaymentAction>   initialization_actions             = new List<PaymentAction>();
+        public List<PaymentAction>   vaulting_actions                   = new List<PaymentAction>();
+        public List<PaymentAction>   charge_actions                     = new List<PaymentAction>();
     }
 
     [Serializable]
