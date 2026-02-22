@@ -545,8 +545,9 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class UpdateEmailRequest
     {
-        public string session_id = "";
-        public string email      = "";
+        public string session_id    = "";
+        public string email         = "";
+        public bool   delete_email  = false;
     }
     
     [Serializable]
