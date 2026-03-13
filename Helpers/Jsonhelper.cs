@@ -29,7 +29,7 @@ namespace Galleon.Checkout.Shared
 
                 PaymentMethodDefinitionData obj = type switch
                                                 {
-                                                    "credit_card" => new CreditCardPaymentMethodDefinitionData(),
+                                                    "card"        => new CreditCardPaymentMethodDefinitionData(),
                                                     "gpay"        => new GooglePayPaymentMethodDefinitionData(),
                                                     "paypal"      => new PaypalPaymentMethodDefinitionData(),
                                                     _             => throw new Exception($"Unknown type: {type}")
@@ -60,7 +60,7 @@ namespace Galleon.Checkout.Shared
 
                 UserPaymentMethodData obj = type switch
                                       {
-                                          "credit_card" => new CreditCardUserPaymentMethodData(),
+                                          "card"        => new CreditCardUserPaymentMethodData(),
                                           "gpay"        => new GooglePayUserPaymentMethodData(),
                                           "paypal"      => new PaypalUserPaymentMethodData(),
                                           _             => throw new Exception($"Unknown type: {type}")
