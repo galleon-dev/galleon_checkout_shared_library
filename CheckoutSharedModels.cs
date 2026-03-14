@@ -159,8 +159,8 @@ namespace Galleon.Checkout.Shared
         public string                display_name                       = "";
         
         public bool                  display_empty_upm_in_checkout_page = false;
-        public string                selection_page_upms_display_mode   = "default";
-        
+        public string                selection_page_upms_display_mode   = "default"; // "none" / "top" / "trailing"
+              
         public List<PaymentProvider> providers                          = new List<PaymentProvider>();
         
         public string                icon_url                           = "";
