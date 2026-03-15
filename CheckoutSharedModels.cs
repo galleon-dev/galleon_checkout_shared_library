@@ -403,6 +403,8 @@ namespace Galleon.Checkout.Shared
         public OrderDetails order;         
         public DateTime     expires_at;    
         public string       status         = "";
+        
+        public string[]     errors         = null;
     }
     
     [Serializable]
