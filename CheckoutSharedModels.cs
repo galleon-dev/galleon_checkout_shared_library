@@ -365,6 +365,7 @@ namespace Galleon.Checkout.Shared
         public OrderDetails               order;      
         public DateTime                   expires_at; 
         public Dictionary<string, string> metadata;   
+        public string                     payer_ip = null;
     }
 
     /// Response Example :
