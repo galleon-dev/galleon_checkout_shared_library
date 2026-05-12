@@ -441,6 +441,8 @@ namespace Galleon.Checkout.Shared
     public class TaxData
     {
         public bool                        should_display_taxes;
+        public string                      tax_country           = "";
+        public string                      tax_state             = null;
         public Dictionary<string, TaxItem> taxes                 = new();
     }
     
