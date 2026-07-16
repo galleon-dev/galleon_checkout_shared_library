@@ -383,13 +383,7 @@ namespace Galleon.Checkout.Shared
     ///                                                                     "Tax" : { 4.99, true  }, // true  = "inclusive"     = this item is pat of the subtotal
     ///                                                                     "IRS" : { 2,    false }  // false = "not inclusive" = outside of subtotal
     ///                                                                 }
-    ///                                        },
-    ///
-    ///                      // optional. omit rather than guess - the client forwards these to the
-    ///                      // host game's analytics and has no other way to know them.
-    ///                      "exchange_rate"       : 0.1997,
-    ///                      "usd_amount"          : 5.99,
-    ///                      "usd_amount_with_tax" : 5.99
+    ///                                        }
     ///                  },
     /// 
     ///     "order"      :
@@ -436,25 +430,9 @@ namespace Galleon.Checkout.Shared
     [Serializable]
     public class PriceData
     {
-        public decimal  total_price;
-        public decimal  subtotal_price;
-        public TaxData  tax;
-
-        //////////////////////////////////////// USD reference values  (server -> client, optional)
-
-        /// These exist because only the server can know them.
-        /// The client is handed a local-currency product (e.g. 29.99 PLN) and never sees the USD
-        /// reference price, so it cannot derive a rate: it has the denominator and not the numerator.
-        /// The server already computes these for its own reporting — sending them here lets the
-        /// client forward the true values into the host game's analytics instead of guessing.
-        ///
-        /// NULLABLE ON PURPOSE. null means "the server did not send this", which is a different
-        /// statement from 0 or 1. The client omits the field entirely when null and MUST NOT
-        /// substitute a default — a fabricated rate of 1.0 previously reported PLN as USD.
-
-        public decimal? exchange_rate;        // usd_amount / subtotal_price   e.g. 5.99 / 29.99 = 0.1997
-        public decimal? usd_amount;           // subtotal_price, in USD        e.g. 5.99
-        public decimal? usd_amount_with_tax;  // total_price,    in USD        e.g. 5.99 (PL, inclusive) / 7.37 (US, added)
+        public decimal total_price;
+        public decimal subtotal_price;
+        public TaxData tax;
     }
     
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Tax Helper Classes
